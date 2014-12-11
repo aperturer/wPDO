@@ -22,22 +22,22 @@ class db{
 		PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
 	);
 
-	/** 
-     * Добавить (заменить) конфигурацию подключения к базе данных
-     * @param array $config массив с конфигурацией (см. default_conf + default_opts)
-     * @param string $name опциональное имя соединения
-     */
+	/**
+	 * Добавить (заменить) конфигурацию подключения к базе данных
+	 * @param array $config массив с конфигурацией (см. default_conf + default_opts)
+	 * @param string $name опциональное имя соединения
+	 */
 	public static function add($config, $name = ''){
 		self::$configs[$name] = $config;
 		unset(self::$connects[$name]); // чтобы заменить подключение если имя совпадает
 	}
 
 	/**
-     * Получить объект соединения по имени или первый из имеющихся.
+	 * Получить объект соединения по имени или первый из имеющихся.
 	 * Объект PDO создаётся если ещё не был создан.
-     * @param string $name опциональное имя соединения
-     * @return object PDO
-     */
+	 * @param string $name опциональное имя соединения
+	 * @return object PDO
+	 */
 	public static function get($name = ''){
 		if(!isset(self::$configs[$name])){
 			if($name) throw new Exception("Error! No exist connection $name");
